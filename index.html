@@ -1,21 +1,735 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-GB">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AgentSee</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; display: flex; align-items: center; justify-content: center; min-height: 100vh; background: #0a0a0a; color: #e0e0e0; }
-        .container { text-align: center; }
-        h1 { font-size: 3rem; font-weight: 300; letter-spacing: 0.1em; margin-bottom: 0.5rem; }
-        p { font-size: 1.1rem; color: #888; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AgentSee | Start Your London Estate Agent Match Report</title>
+  <meta name="description" content="Enter your postcode to start your Agent Match Report. AgentSee helps London property owners compare how estate agents work without rankings or recommendations.">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#00616a">
+  <link rel="canonical" href="https://agentsee.uk/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="AgentSee | Start your London estate agent match report">
+  <meta property="og:description" content="Enter your postcode to compare how London estate agents work without rankings or recommendations.">
+  <meta property="og:url" content="https://agentsee.uk/">
+  <meta property="og:site_name" content="AgentSee">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="AgentSee | Start your London estate agent match report">
+  <meta name="twitter:description" content="Enter your postcode to begin a neutral Agent Match Report.">
+  <style>
+    :root {
+      --teal-900: #06373d;
+      --teal-800: #005a63;
+      --teal-700: #00616a;
+      --teal-100: #e9f6f4;
+      --berry-600: #d94b78;
+      --berry-700: #bf3664;
+      --ink: #172326;
+      --muted: #5b6a6d;
+      --line: #d9e1e3;
+      --panel: #ffffff;
+      --page: #f6f8f9;
+      --white: #ffffff;
+      --shadow: 0 18px 50px rgba(8, 33, 37, 0.12);
+      --radius-lg: 28px;
+      --radius-md: 18px;
+      --max: 1160px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background: var(--page);
+      line-height: 1.55;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .wrap {
+      width: min(calc(100% - 2rem), var(--max));
+      margin: 0 auto;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(23, 35, 38, 0.08);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      min-height: 76px;
+    }
+
+    .brand {
+      font-size: 1.55rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+
+    .brand span {
+      color: var(--berry-600);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.1rem;
+      flex-wrap: wrap;
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+
+    .button,
+    button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 50px;
+      padding: 0.9rem 1.25rem;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font: inherit;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+    }
+
+    .button:hover,
+    button:hover {
+      transform: translateY(-1px);
+    }
+
+    .button-primary {
+      background: var(--berry-600);
+      color: var(--white);
+      box-shadow: 0 12px 26px rgba(217, 75, 120, 0.24);
+    }
+
+    .button-primary:hover {
+      background: var(--berry-700);
+    }
+
+    .button-secondary {
+      background: var(--white);
+      color: var(--teal-800);
+      border-color: rgba(0, 97, 106, 0.16);
+    }
+
+    .hero {
+      padding: 2.2rem 0 3rem;
+      background:
+        radial-gradient(circle at top right, rgba(217, 75, 120, 0.14), transparent 22%),
+        linear-gradient(180deg, var(--teal-700) 0%, var(--teal-900) 78%, var(--page) 78%);
+    }
+
+    .hero-shell {
+      display: grid;
+      gap: 1.5rem;
+    }
+
+    .hero-copy {
+      text-align: center;
+      color: var(--white);
+      max-width: 54rem;
+      margin: 0 auto;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.45rem 0.75rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.12);
+      color: rgba(255, 255, 255, 0.92);
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    h1, h2, h3 {
+      margin: 0 0 1rem;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+    }
+
+    h1 {
+      margin-top: 1rem;
+      font-size: clamp(2.8rem, 7vw, 5.4rem);
+    }
+
+    h2 {
+      font-size: clamp(1.9rem, 4vw, 3rem);
+    }
+
+    h3 {
+      font-size: 1.25rem;
+    }
+
+    p {
+      margin: 0 0 1rem;
+      color: var(--muted);
+      font-size: 1.03rem;
+    }
+
+    .hero-copy p {
+      color: rgba(255, 255, 255, 0.86);
+      max-width: 44rem;
+      margin: 0 auto;
+      font-size: 1.12rem;
+    }
+
+    .search-card {
+      background: var(--panel);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+      padding: 1rem;
+      width: min(100%, 920px);
+      margin: 1.5rem auto 0;
+    }
+
+    .search-tabs {
+      display: inline-flex;
+      gap: 0.5rem;
+      margin-bottom: 0.9rem;
+      padding: 0.3rem;
+      border-radius: 999px;
+      background: #f2f5f6;
+    }
+
+    .tab {
+      padding: 0.7rem 1rem;
+      border-radius: 999px;
+      font-size: 0.94rem;
+      font-weight: 700;
+      color: var(--muted);
+      background: transparent;
+    }
+
+    .tab-active {
+      background: var(--teal-800);
+      color: var(--white);
+    }
+
+    .search-grid {
+      display: grid;
+      grid-template-columns: 1.8fr 0.95fr 0.95fr auto;
+      gap: 0.75rem;
+      align-items: end;
+    }
+
+    .field label {
+      display: block;
+      margin-bottom: 0.35rem;
+      color: var(--muted);
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    .field input,
+    .field select {
+      width: 100%;
+      min-height: 56px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 0 0.95rem;
+      font: inherit;
+      color: var(--ink);
+      background: var(--white);
+      appearance: none;
+    }
+
+    .search-card button {
+      min-width: 170px;
+      min-height: 56px;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.75rem 1.25rem;
+      margin-top: 1rem;
+      color: rgba(255, 255, 255, 0.86);
+      font-size: 0.95rem;
+    }
+
+    .hero-meta span::before {
+      content: "•";
+      margin-right: 0.45rem;
+      color: #7cf0d3;
+    }
+
+    .content {
+      padding-bottom: 4rem;
+    }
+
+    .strip {
+      margin-top: -1.2rem;
+    }
+
+    .trust-strip {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .pill-card,
+    .card,
+    .faq-item {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      box-shadow: 0 10px 24px rgba(16, 40, 44, 0.05);
+    }
+
+    .pill-card {
+      padding: 1.1rem 1.2rem;
+    }
+
+    .pill-card strong {
+      display: block;
+      margin-bottom: 0.25rem;
+      font-size: 1rem;
+    }
+
+    .section {
+      padding: 2.5rem 0 0;
+    }
+
+    .section-head {
+      max-width: 40rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .section-kicker {
+      margin-bottom: 0.5rem;
+      color: var(--teal-800);
+      font-size: 0.78rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .grid-3,
+    .grid-2,
+    .boroughs {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .grid-3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .grid-2 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .card,
+    .faq-item {
+      padding: 1.4rem;
+    }
+
+    .card p:last-child,
+    .faq-item p:last-child {
+      margin-bottom: 0;
+    }
+
+    .list {
+      margin: 0;
+      padding-left: 1.05rem;
+      color: var(--muted);
+    }
+
+    .list li {
+      margin-bottom: 0.45rem;
+    }
+
+    .match-card {
+      background: linear-gradient(180deg, #ffffff 0%, #f7fbfb 100%);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+      padding: 1.5rem;
+    }
+
+    .match-card h3 {
+      margin-bottom: 0.35rem;
+    }
+
+    .match-meta {
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin-bottom: 0.95rem;
+    }
+
+    .tick-list {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0 0;
+      color: var(--muted);
+    }
+
+    .tick-list li {
+      position: relative;
+      padding-left: 1.45rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .tick-list li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--teal-800);
+      font-weight: 800;
+    }
+
+    .boroughs {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+
+    .borough {
+      padding: 1rem;
+      text-align: center;
+      font-weight: 700;
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+    }
+
+    .notice {
+      padding: 1rem 1.2rem;
+      border-left: 4px solid var(--berry-600);
+      background: #fff6f9;
+      color: var(--ink);
+      border-radius: 0 16px 16px 0;
+    }
+
+    .site-footer {
+      margin-top: 4rem;
+      background: var(--teal-900);
+      color: var(--white);
+      padding: 2.5rem 0 3rem;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 1rem;
+    }
+
+    .site-footer p,
+    .site-footer a {
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 1rem;
+      align-content: start;
+    }
+
+    @media (max-width: 1020px) {
+      .search-grid,
+      .trust-strip,
+      .grid-3,
+      .grid-2,
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .boroughs {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .site-header {
+        position: static;
+      }
+
+      .nav,
+      .nav-links {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .hero {
+        padding-top: 1.4rem;
+      }
+
+      .search-card {
+        padding: 0.85rem;
+      }
+
+      .search-tabs {
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .boroughs {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-links {
+        justify-content: flex-start;
+      }
+    }
+  </style>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "name": "AgentSee",
+          "url": "https://agentsee.uk/",
+          "description": "AgentSee is a London-first decision-support platform that helps property owners compare how estate agents work before choosing representation.",
+          "areaServed": [
+            "Kensington and Chelsea",
+            "Westminster",
+            "Camden",
+            "Islington",
+            "Hammersmith and Fulham"
+          ]
+        },
+        {
+          "@type": "WebSite",
+          "name": "AgentSee",
+          "url": "https://agentsee.uk/"
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "Does AgentSee rank or recommend estate agents?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No. AgentSee does not rank, score, or recommend agents."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Can agents pay to appear more often?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No. Subscription status does not influence matching or visibility within reports."
+              }
+            }
+          ]
+        }
+      ]
+    }
+  </script>
 </head>
 <body>
-    <div class="container">
-        <h1>AgentSee</h1>
-        <p>Coming soon.</p>
+  <header class="site-header">
+    <div class="wrap nav">
+      <a class="brand" href="#top" aria-label="AgentSee home">Agent<span>See</span></a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="#how-it-works">How it works</a>
+        <a href="#report">The report</a>
+        <a href="#faq">FAQ</a>
+        <a class="button button-secondary" href="#start-report">Start report</a>
+      </nav>
     </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="wrap hero-shell">
+        <div class="hero-copy">
+          <div class="eyebrow">London-first estate agent matching</div>
+          <h1>Find agents that fit how you want to sell or let.</h1>
+          <p>Enter your postcode to start a neutral Agent Match Report based on your property and priorities. No rankings. No recommendations. No paid placement.</p>
+        </div>
+
+        <div class="search-card" id="start-report">
+          <div class="search-tabs" aria-label="Transaction type">
+            <div class="tab tab-active">Selling</div>
+            <div class="tab">Letting</div>
+          </div>
+          <form class="search-grid" action="#report" method="get">
+            <div class="field">
+              <label for="postcode">Postcode</label>
+              <input id="postcode" name="postcode" type="text" autocomplete="postal-code" placeholder="e.g. SW3 5RS" required>
+            </div>
+            <div class="field">
+              <label for="property-type">Property type</label>
+              <select id="property-type" name="property_type">
+                <option>Any</option>
+                <option>Flat</option>
+                <option>House</option>
+                <option>New build</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="bedrooms">Bedrooms</label>
+              <select id="bedrooms" name="bedrooms">
+                <option>Any</option>
+                <option>1+</option>
+                <option>2+</option>
+                <option>3+</option>
+                <option>4+</option>
+              </select>
+            </div>
+            <button class="button button-primary" type="submit">Start report</button>
+          </form>
+        </div>
+
+        <div class="hero-meta" aria-label="Product highlights">
+          <span>3 to 5 matched agents</span>
+          <span>Structured profile data</span>
+          <span>Vendor-led contact only</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="content">
+      <section class="strip">
+        <div class="wrap trust-strip">
+          <article class="pill-card">
+            <strong>Neutral by design</strong>
+            <p>AgentSee provides decision-support information and does not recommend agents.</p>
+          </article>
+          <article class="pill-card">
+            <strong>Explainable matching</strong>
+            <p>Shortlists are based on postcode coverage, experience, and service commitments.</p>
+          </article>
+          <article class="pill-card">
+            <strong>Built for London first</strong>
+            <p>The first release focuses on five boroughs instead of trying to cover the whole UK.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="how-it-works">
+        <div class="wrap">
+          <div class="section-head">
+            <div class="section-kicker">How it works</div>
+            <h2>A cleaner alternative to agent leaderboards.</h2>
+            <p>Instead of pushing “top agents”, AgentSee asks what matters to you and returns a report with matched agents and structured profile details.</p>
+          </div>
+          <div class="grid-3">
+            <article class="card">
+              <h3>1. Enter the basics</h3>
+              <p>Start with postcode, property type, price band, bedrooms, and whether you are selling or letting.</p>
+            </article>
+            <article class="card">
+              <h3>2. Set your priorities</h3>
+              <p>Choose service style, communication preferences, and the kind of marketing support you want.</p>
+            </article>
+            <article class="card">
+              <h3>3. Receive your report</h3>
+              <p>View 3 to 5 matched agents with experience snapshots, service commitments, and direct contact options.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="report">
+        <div class="wrap grid-2">
+          <div>
+            <div class="section-head">
+              <div class="section-kicker">The report</div>
+              <h2>Everything points toward one product.</h2>
+              <p>The Agent Match Report is the main output. It should feel clear, factual, and calm, not sales-led.</p>
+            </div>
+            <div class="notice">AgentSee provides decision-support information and does not recommend agents.</div>
+          </div>
+          <article class="match-card">
+            <h3>What appears in the report</h3>
+            <div class="match-meta">Structured content only</div>
+            <ul class="tick-list">
+              <li>Property summary and vendor priorities</li>
+              <li>Why each agent matched the brief</li>
+              <li>Area focus and experience snapshot</li>
+              <li>Declared service commitments</li>
+              <li>Direct contact details if you want to reach out</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="wrap">
+          <div class="section-head">
+            <div class="section-kicker">London launch area</div>
+            <h2>Starting in five boroughs.</h2>
+          </div>
+          <div class="boroughs" aria-label="Launch boroughs">
+            <div class="borough">Kensington &amp; Chelsea</div>
+            <div class="borough">Westminster</div>
+            <div class="borough">Camden</div>
+            <div class="borough">Islington</div>
+            <div class="borough">Hammersmith &amp; Fulham</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="faq">
+        <div class="wrap">
+          <div class="section-head">
+            <div class="section-kicker">FAQ</div>
+            <h2>Common questions.</h2>
+          </div>
+          <div class="grid-2">
+            <article class="faq-item">
+              <h3>Does AgentSee recommend estate agents?</h3>
+              <p>No. It does not rank, recommend, or publicly score agents.</p>
+            </article>
+            <article class="faq-item">
+              <h3>How are agents matched?</h3>
+              <p>Using postcode coverage, property expertise, price-band experience, service commitments, and your priorities.</p>
+            </article>
+            <article class="faq-item">
+              <h3>Can agents pay to appear more often?</h3>
+              <p>No. Subscription revenue must not influence matching or visibility.</p>
+            </article>
+            <article class="faq-item">
+              <h3>What happens after I receive a report?</h3>
+              <p>You review the matched profiles and decide whether to contact an agent directly.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-grid">
+      <div>
+        <a class="brand" href="#top" style="color:#ffffff;">Agent<span>See</span></a>
+        <p style="margin-top:1rem; max-width:40rem;">AgentSee helps London property owners compare how estate agents work before choosing representation.</p>
+      </div>
+      <div class="footer-links">
+        <a href="#how-it-works">How it works</a>
+        <a href="#report">The report</a>
+        <a href="#faq">FAQ</a>
+        <a href="mailto:hello@agentsee.uk">Contact</a>
+      </div>
+    </div>
+  </footer>
 </body>
 </html>
