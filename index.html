@@ -72,13 +72,13 @@
       align-items: center;
       justify-content: space-between;
       gap: 1rem;
-      min-height: 76px;
+      min-height: 80px;
     }
 
     .brand {
-      font-size: 1.55rem;
+      font-size: 1.65rem;
       font-weight: 800;
-      letter-spacing: -0.03em;
+      letter-spacing: -0.04em;
     }
 
     .brand span {
@@ -88,10 +88,11 @@
     .nav-links {
       display: flex;
       align-items: center;
-      gap: 1.1rem;
+      gap: 1.25rem;
       flex-wrap: wrap;
       color: var(--muted);
-      font-size: 0.96rem;
+      font-size: 0.95rem;
+      font-weight: 500;
     }
 
     .button,
@@ -209,6 +210,14 @@
       font-size: 1.12rem;
     }
 
+    .hero-visual {
+      width: min(100%, 820px);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 1rem;
+    }
+
     .search-card {
       background: var(--panel);
       border-radius: var(--radius-lg);
@@ -217,6 +226,97 @@
       width: min(100%, 980px);
       margin: 1.5rem auto 0;
       border: 1px solid rgba(255, 255, 255, 0.42);
+    }
+
+    .report-preview {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(180deg, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.08) 100%);
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: var(--radius-lg);
+      padding: 1.1rem;
+      color: var(--white);
+      box-shadow: 0 16px 42px rgba(7, 28, 31, 0.18);
+    }
+
+    .report-preview::before {
+      content: "";
+      position: absolute;
+      inset: auto auto -18% -8%;
+      width: 12rem;
+      height: 12rem;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(217, 75, 120, 0.22) 0%, rgba(217, 75, 120, 0) 72%);
+      pointer-events: none;
+    }
+
+    .report-sheet-mini {
+      background: rgba(255,255,255,0.96);
+      color: var(--ink);
+      border-radius: 22px;
+      padding: 1rem;
+      min-height: 100%;
+    }
+
+    .report-sheet-mini h3 {
+      font-size: 1.02rem;
+      margin-bottom: 0.7rem;
+    }
+
+    .mini-kicker {
+      display: inline-block;
+      margin-bottom: 0.55rem;
+      color: rgba(255,255,255,0.82);
+      font-size: 0.74rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .mini-lines {
+      display: grid;
+      gap: 0.6rem;
+      margin-top: 0.8rem;
+    }
+
+    .mini-line {
+      height: 11px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #dff2ef 0%, #f4f7f8 100%);
+    }
+
+    .mini-line.short {
+      width: 64%;
+    }
+
+    .mini-line.mid {
+      width: 82%;
+    }
+
+    .mini-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.7rem;
+      margin-top: 0.9rem;
+    }
+
+    .mini-stat {
+      padding: 0.8rem;
+      border-radius: 16px;
+      background: #f6fbfb;
+      border: 1px solid #dfebed;
+    }
+
+    .mini-stat strong {
+      display: block;
+      font-size: 1.05rem;
+      color: var(--teal-800);
+      margin-bottom: 0.18rem;
+    }
+
+    .mini-stat span {
+      color: var(--muted);
+      font-size: 0.86rem;
     }
 
     .search-grid {
@@ -493,6 +593,7 @@
     }
 
     @media (max-width: 1020px) {
+      .hero-visual,
       .search-meta,
       .trust-strip,
       .grid-3,
@@ -519,6 +620,10 @@
 
       .hero {
         padding-top: 1.4rem;
+      }
+
+      .hero-visual {
+        width: 100%;
       }
 
       .search-card {
@@ -607,24 +712,52 @@
           <p>Enter your postcode to start a neutral Agent Match Report built around how you want to sell or let, not who paid to appear.</p>
         </div>
 
-        <div class="search-card" id="start-report">
-          <form class="search-grid" action="#report" method="get">
-            <div class="field">
-              <label for="postcode">Postcode</label>
-              <input id="postcode" name="postcode" type="text" autocomplete="postal-code" placeholder="e.g. SW3 5RS" required>
-            </div>
-            <button class="button button-primary" type="submit">Compare agents</button>
-          </form>
-          <div class="search-meta">
-            <div class="micro-note">
-              <strong>What happens next</strong>
-              You answer a short set of questions about your property and priorities, then receive 3 to 5 matched agents with structured profile details.
-            </div>
-            <div class="mini-proof">
-              <strong>Neutral by design</strong>
-              No rankings or recommendations
+        <div class="hero-visual">
+          <div class="search-card" id="start-report">
+            <form class="search-grid" action="#report" method="get">
+              <div class="field">
+                <label for="postcode">Postcode</label>
+                <input id="postcode" name="postcode" type="text" autocomplete="postal-code" placeholder="e.g. SW3 5RS" required>
+              </div>
+              <button class="button button-primary" type="submit">Compare agents</button>
+            </form>
+            <div class="search-meta">
+              <div class="micro-note">
+                <strong>What happens next</strong>
+                You answer a short set of questions about your property and priorities, then receive 3 to 5 matched agents with structured profile details.
+              </div>
+              <div class="mini-proof">
+                <strong>Neutral by design</strong>
+                No rankings or recommendations
+              </div>
             </div>
           </div>
+          <aside class="report-preview" aria-label="Agent Match Report preview">
+            <div class="mini-kicker">Example report view</div>
+            <div class="report-sheet-mini">
+              <h3>Agent Match Report</h3>
+              <div class="mini-lines">
+                <div class="mini-line"></div>
+                <div class="mini-line mid"></div>
+                <div class="mini-line short"></div>
+              </div>
+              <div class="mini-stats">
+                <div class="mini-stat">
+                  <strong>3-5</strong>
+                  <span>matched agents</span>
+                </div>
+                <div class="mini-stat">
+                  <strong>1</strong>
+                  <span>clear report</span>
+                </div>
+              </div>
+              <ul class="tick-list" style="margin-top:1rem;">
+                <li>Property summary</li>
+                <li>Priority matching</li>
+                <li>Service commitments</li>
+              </ul>
+            </div>
+          </aside>
         </div>
 
         <div class="hero-meta" aria-label="Product highlights">
