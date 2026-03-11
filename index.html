@@ -131,15 +131,29 @@
     }
 
     .hero {
-      padding: 2.2rem 0 3rem;
+      position: relative;
+      overflow: hidden;
+      padding: 2.2rem 0 3.4rem;
       background:
-        radial-gradient(circle at top right, rgba(217, 75, 120, 0.14), transparent 22%),
+        radial-gradient(circle at 88% 10%, rgba(217, 75, 120, 0.18), transparent 18%),
+        radial-gradient(circle at 12% 18%, rgba(124, 240, 211, 0.12), transparent 18%),
         linear-gradient(180deg, var(--teal-700) 0%, var(--teal-900) 78%, var(--page) 78%);
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto -12% 7rem auto;
+      width: 26rem;
+      height: 26rem;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0) 70%);
+      pointer-events: none;
     }
 
     .hero-shell {
       display: grid;
-      gap: 1.5rem;
+      gap: 1.7rem;
     }
 
     .hero-copy {
@@ -171,7 +185,7 @@
 
     h1 {
       margin-top: 1rem;
-      font-size: clamp(2.8rem, 7vw, 5.4rem);
+      font-size: clamp(3rem, 7vw, 5.8rem);
     }
 
     h2 {
@@ -199,37 +213,15 @@
       background: var(--panel);
       border-radius: var(--radius-lg);
       box-shadow: var(--shadow);
-      padding: 1rem;
-      width: min(100%, 920px);
+      padding: 1.15rem;
+      width: min(100%, 980px);
       margin: 1.5rem auto 0;
-    }
-
-    .search-tabs {
-      display: inline-flex;
-      gap: 0.5rem;
-      margin-bottom: 0.9rem;
-      padding: 0.3rem;
-      border-radius: 999px;
-      background: #f2f5f6;
-    }
-
-    .tab {
-      padding: 0.7rem 1rem;
-      border-radius: 999px;
-      font-size: 0.94rem;
-      font-weight: 700;
-      color: var(--muted);
-      background: transparent;
-    }
-
-    .tab-active {
-      background: var(--teal-800);
-      color: var(--white);
+      border: 1px solid rgba(255, 255, 255, 0.42);
     }
 
     .search-grid {
       display: grid;
-      grid-template-columns: 1.8fr 0.95fr 0.95fr auto;
+      grid-template-columns: minmax(0, 1fr) auto;
       gap: 0.75rem;
       align-items: end;
     }
@@ -245,19 +237,63 @@
     .field input,
     .field select {
       width: 100%;
-      min-height: 56px;
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      padding: 0 0.95rem;
+      min-height: 60px;
+      border: 1px solid #cfd8da;
+      border-radius: 18px;
+      padding: 0 1rem;
       font: inherit;
       color: var(--ink);
       background: var(--white);
       appearance: none;
+      box-shadow: inset 0 1px 0 rgba(23, 35, 38, 0.03);
+    }
+
+    .field input:focus,
+    .field select:focus {
+      outline: none;
+      border-color: var(--teal-700);
+      box-shadow: 0 0 0 4px rgba(0, 97, 106, 0.12);
     }
 
     .search-card button {
-      min-width: 170px;
-      min-height: 56px;
+      min-width: 210px;
+      min-height: 60px;
+    }
+
+    .search-meta {
+      display: grid;
+      grid-template-columns: 1.3fr 0.7fr;
+      gap: 0.9rem;
+      margin-top: 0.9rem;
+    }
+
+    .micro-note,
+    .mini-proof {
+      border-radius: 18px;
+      padding: 0.95rem 1rem;
+    }
+
+    .micro-note {
+      background: #f4fbfb;
+      border: 1px solid #d8eceb;
+      color: var(--teal-900);
+      font-size: 0.96rem;
+    }
+
+    .mini-proof {
+      background: #fff6f9;
+      border: 1px solid #f4d0dc;
+      color: var(--berry-700);
+      font-size: 0.94rem;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .micro-note strong,
+    .mini-proof strong {
+      display: block;
+      margin-bottom: 0.18rem;
+      color: var(--ink);
     }
 
     .hero-meta {
@@ -281,7 +317,7 @@
     }
 
     .strip {
-      margin-top: -1.2rem;
+      margin-top: -1.6rem;
     }
 
     .trust-strip {
@@ -300,7 +336,7 @@
     }
 
     .pill-card {
-      padding: 1.1rem 1.2rem;
+      padding: 1.15rem 1.25rem;
     }
 
     .pill-card strong {
@@ -310,7 +346,7 @@
     }
 
     .section {
-      padding: 2.5rem 0 0;
+      padding: 2.8rem 0 0;
     }
 
     .section-head {
@@ -368,6 +404,14 @@
       border-radius: var(--radius-lg);
       box-shadow: var(--shadow);
       padding: 1.5rem;
+    }
+
+    .report-band {
+      margin-top: 2.8rem;
+      padding: 2.6rem 0;
+      background: linear-gradient(180deg, #edf7f8 0%, #f6f8f9 100%);
+      border-top: 1px solid #d8e8ea;
+      border-bottom: 1px solid #d8e8ea;
     }
 
     .match-card h3 {
@@ -449,7 +493,7 @@
     }
 
     @media (max-width: 1020px) {
-      .search-grid,
+      .search-meta,
       .trust-strip,
       .grid-3,
       .grid-2,
@@ -481,10 +525,8 @@
         padding: 0.85rem;
       }
 
-      .search-tabs {
-        width: 100%;
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
+      .search-meta {
+        grid-template-columns: 1fr;
       }
 
       .boroughs {
@@ -561,41 +603,28 @@
       <div class="wrap hero-shell">
         <div class="hero-copy">
           <div class="eyebrow">London-first estate agent matching</div>
-          <h1>Find agents that fit how you want to sell or let.</h1>
-          <p>Enter your postcode to start a neutral Agent Match Report based on your property and priorities. No rankings. No recommendations. No paid placement.</p>
+          <h1>Compare London Estate Agents</h1>
+          <p>Enter your postcode to start a neutral Agent Match Report built around how you want to sell or let, not who paid to appear.</p>
         </div>
 
         <div class="search-card" id="start-report">
-          <div class="search-tabs" aria-label="Transaction type">
-            <div class="tab tab-active">Selling</div>
-            <div class="tab">Letting</div>
-          </div>
           <form class="search-grid" action="#report" method="get">
             <div class="field">
               <label for="postcode">Postcode</label>
               <input id="postcode" name="postcode" type="text" autocomplete="postal-code" placeholder="e.g. SW3 5RS" required>
             </div>
-            <div class="field">
-              <label for="property-type">Property type</label>
-              <select id="property-type" name="property_type">
-                <option>Any</option>
-                <option>Flat</option>
-                <option>House</option>
-                <option>New build</option>
-              </select>
-            </div>
-            <div class="field">
-              <label for="bedrooms">Bedrooms</label>
-              <select id="bedrooms" name="bedrooms">
-                <option>Any</option>
-                <option>1+</option>
-                <option>2+</option>
-                <option>3+</option>
-                <option>4+</option>
-              </select>
-            </div>
-            <button class="button button-primary" type="submit">Start report</button>
+            <button class="button button-primary" type="submit">Compare agents</button>
           </form>
+          <div class="search-meta">
+            <div class="micro-note">
+              <strong>What happens next</strong>
+              You answer a short set of questions about your property and priorities, then receive 3 to 5 matched agents with structured profile details.
+            </div>
+            <div class="mini-proof">
+              <strong>Neutral by design</strong>
+              No rankings or recommendations
+            </div>
+          </div>
         </div>
 
         <div class="hero-meta" aria-label="Product highlights">
@@ -648,7 +677,7 @@
         </div>
       </section>
 
-      <section class="section" id="report">
+      <section class="report-band" id="report">
         <div class="wrap grid-2">
           <div>
             <div class="section-head">
